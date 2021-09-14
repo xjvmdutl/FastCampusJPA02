@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Entity//엔티티에는 PK값이 반드시 필요하다
 public class User {
     @Id//primary키
-    @GeneratedValue//순차적 증가
+    @GeneratedValue(strategy = GenerationType.IDENTITY)//순차적 증가
     private Long id;
 
     @NonNull

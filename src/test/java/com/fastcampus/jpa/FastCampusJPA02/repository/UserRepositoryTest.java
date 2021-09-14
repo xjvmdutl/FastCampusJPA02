@@ -1,24 +1,17 @@
 package com.fastcampus.jpa.FastCampusJPA02.repository;
 
 import com.fastcampus.jpa.FastCampusJPA02.domain.User;
-import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 
 import javax.transaction.Transactional;
-
-import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.contains;
-import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.endsWith;
 
 @SpringBootTest
 class UserRepositoryTest {
     @Autowired
     private UserRepository userRepository;
+
     @Test
     @Transactional// 세션을 유지 시켜 준다
     void crud(){//create,read,update,delete
@@ -107,5 +100,32 @@ class UserRepositoryTest {
 
         userRepository.save(user);
 
+
     }
+
+    @Test
+    void select(){
+        //System.out.println(userRepository.findByName("martin"));
+        //martin 레코드가 2개가 나오기 때문에 List<User>타입으로 받아야 된다.
+        System.out.println(userRepository.findByName("dennis"));
+
+        System.out.println("findByEmail : " + userRepository.findByEmail("martin"));
+        System.out.println("getByEmail : " + userRepository.getByEmail("martin"));
+        System.out.println("readByEmail : " + userRepository.readByEmail("martin"));
+        System.out.println("queryByEmail : " + userRepository.queryByEmail("martin"));
+        System.out.println("searchByEmail : " + userRepository.searchByEmail("martin"));
+        System.out.println("streamByEmail : " + userRepository.streamByEmail("martin"));
+        System.out.println("findUserByEmail : " + userRepository.findUserByEmail("martin"));
+
+        //잘못된 표기
+        //System.out.println("findSomethingByEmail : " + userRepository.findSomethingByEmail("martin"));
+        //System.out.println("findByByEmail : " + userRepository.findByByEmail("martin"));
+
+        System.out.println("findFirstByName : " + userRepository.findFirst2ByName("martin"));
+        System.out.println("findTopByName : " + userRepository.findTop2ByName("martin"));
+
+        System.out.println("findLast1ByName : " + userRepository.findLast1ByName("martin"));
+        //존재하지 않는 키워드가 있을경우에는 무시해서 find와 동일하게 동작된다.
+    }
+
 }

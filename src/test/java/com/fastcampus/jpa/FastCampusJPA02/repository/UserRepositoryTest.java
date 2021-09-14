@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 
 @SpringBootTest
 class UserRepositoryTest {
@@ -126,6 +127,22 @@ class UserRepositoryTest {
 
         System.out.println("findLast1ByName : " + userRepository.findLast1ByName("martin"));
         //존재하지 않는 키워드가 있을경우에는 무시해서 find와 동일하게 동작된다.
+
+
+        System.out.println("findByEmailAndName : " + userRepository.findByEmailAndName("martin@fastCampus.com","martin"));
+        System.out.println("findByEmailOrName : " + userRepository.findByEmailOrName("martin@fastCampus.com","denis"));
+
+        System.out.println("findByCreatedAtAfter : " + userRepository.findByCreatedAtAfter(LocalDateTime.now().minusDays(1L)));
+        System.out.println("findByIdAfter : " + userRepository.findByIdAfter(4L));
+
+        System.out.println("findByCreatedAtGreaterThen : " + userRepository.findByCreatedAtGreaterThen(LocalDateTime.now().minusDays(1L)));
+        System.out.println("findByCreatedAtGreaterThenEqual : " + userRepository.findByCreatedAtGreaterThenEqual(LocalDateTime.now().minusDays(1L)));
+
+        System.out.println("findByCreatedAtBetween : " + userRepository.findByCreatedAtBetween(LocalDateTime.now().minusDays(1L),LocalDateTime.now().plusDays(1L)));
+        System.out.println("findByIdBetween : " + userRepository.findByIdBetween(1L,3L));
+
+        System.out.println("findByIdGreaterThanEqualAndIdLessThanEqual : " + userRepository.findByIdGreaterThanEqualAndIdLessThanEqual(1L,3L));
+
     }
 
 }

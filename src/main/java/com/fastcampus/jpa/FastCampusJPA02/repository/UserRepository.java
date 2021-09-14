@@ -3,6 +3,7 @@ package com.fastcampus.jpa.FastCampusJPA02.repository;
 import com.fastcampus.jpa.FastCampusJPA02.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -34,4 +35,22 @@ public interface UserRepository extends JpaRepository<User,Long> {
     List<User> findTop2ByName(String name);
 
     List<User> findLast1ByName(String name);
+
+    List<User> findByEmailAndName(String email,String name);
+
+    List<User> findByEmailOrName(String email,String name);
+
+    List<User> findByCreatedAtAfter(LocalDateTime yesterday);
+
+    List<User> findByIdAfter(Long id);
+
+    List<User> findByCreatedAtGreaterThen(LocalDateTime yesterday);
+
+    List<User> findByCreatedAtGreaterThenEqual(LocalDateTime yesterday);
+
+    List<User> findByCreatedAtBetween(LocalDateTime yesterday,LocalDateTime tomorrow);
+
+    List<User> findByIdBetween(Long id1,Long id2);
+
+    List<User> findByIdGreaterThanEqualAndIdLessThanEqual(Long id1,Long id2);
 }

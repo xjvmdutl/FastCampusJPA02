@@ -1,6 +1,9 @@
 package com.fastcampus.jpa.FastCampusJPA02.repository;
 
 import com.fastcampus.jpa.FastCampusJPA02.domain.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDateTime;
@@ -13,6 +16,11 @@ import java.util.Set;
 //<엔티티 타입, PK> 값을 넣어 주면 된다.
 public interface UserRepository extends JpaRepository<User,Long> {
     Set<User> findByName(String name);//이름을 통해 가지고 온다.
+
+    //모두 위의 코드와 동일하게 동작한다.
+    Set<User> findUserByNameIs(String name);
+    Set<User> findUserByName(String name);
+    Set<User> findUserByNameEquals(String name);
 
     User findByEmail(String email);
 
@@ -53,4 +61,29 @@ public interface UserRepository extends JpaRepository<User,Long> {
     List<User> findByIdBetween(Long id1,Long id2);
 
     List<User> findByIdGreaterThanEqualAndIdLessThanEqual(Long id1,Long id2);
+
+    List<User> findByIdIsNotNull();
+
+    //List<User> findByAddressIsNotEmpty();
+
+    List<User> findByNameIn(List<String> names);//매개변수로 Iterator 타입이 들어가야된다.
+
+    List<User> findByNameStartingWith(String name);
+    List<User> findByNameEndingWith(String name);
+    List<User> findByNameContains(String name);
+
+    List<User> findByNameLike(String name);
+
+
+    List<User> findTop1ByName(String name);
+
+    List<User> findTop1ByNameOrderByIdDesc(String name);
+
+    //ID는 역순 Email은 정순으로 정렬하여 출력
+    List<User> findFirstByNameOrderByIdDescEmailAsc(String name);
+
+    List<User> findFirstByName(String name, Sort sort);
+
+    Page<User> findByName(String name, Pageable pageable);
+
 }

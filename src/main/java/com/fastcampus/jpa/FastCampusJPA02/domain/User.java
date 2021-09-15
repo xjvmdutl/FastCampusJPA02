@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,4 +23,7 @@ public class User {
     private String email;
     private LocalDateTime createAt;
     private LocalDateTime updateAt;
+
+    //@OneToMany(fetch = FetchType.EAGER)//일 대 다
+    //private List<Address> address;
 }

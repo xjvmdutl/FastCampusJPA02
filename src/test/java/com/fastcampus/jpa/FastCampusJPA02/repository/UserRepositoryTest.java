@@ -1,9 +1,13 @@
 package com.fastcampus.jpa.FastCampusJPA02.repository;
 
 import com.fastcampus.jpa.FastCampusJPA02.domain.User;
+import org.aspectj.weaver.ast.Or;
+import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
@@ -143,6 +147,44 @@ class UserRepositoryTest {
 
         System.out.println("findByIdGreaterThanEqualAndIdLessThanEqual : " + userRepository.findByIdGreaterThanEqualAndIdLessThanEqual(1L,3L));
 
+
+        System.out.println("findByIdIsNotNull : " + userRepository.findByIdIsNotNull());
+        //System.out.println("findByAddressIsNotEmpty : " + userRepository.findByAddressIsNotEmpty());
+
+        System.out.println("findByNameIn : " + userRepository.findByNameIn(Lists.newArrayList("martin","denis")));
+        //다른 쿼리에 결과값을 넣어서 쓸때가 많다
+
+        System.out.println("findByNameStartingWith : " + userRepository.findByNameStartingWith("mar"));
+        System.out.println("findByNameEndingWith : " + userRepository.findByNameEndingWith("tin"));
+        System.out.println("findByNameContains : " + userRepository.findByNameContains("art"));
+
+        System.out.println("findByNameLike : " + userRepository.findByNameLike("%art%"));
+
     }
 
+    @Test
+    void SortingTest(){
+        System.out.println("findTop1ByName : "+ userRepository.findTop1ByName("martin"));
+        System.out.println("findTop1ByNameOrderByIdDesc : "+ userRepository.findTop1ByNameOrderByIdDesc("martin"));
+        System.out.println("findFirstByNameOrderByIdDescEmailAsc : "+ userRepository.findFirstByNameOrderByIdDescEmailAsc("martin"));
+
+        System.out.println("findFirstByNameWithSortParams : "+ userRepository.findFirstByName("martin", Sort.by(Sort.Order.desc("id"))));
+        System.out.println("findFirstByNameWithSortParams : "+ userRepository.findFirstByName("martin", Sort.by(Sort.Order.desc("id"),Sort.Order.asc("email"))));
+    }
+
+    private Sort getSort(){
+        //해당 방식으로 사용해도 된다.
+        return Sort.by(
+                Sort.Order.desc("id"),
+                Sort.Order.asc("email"),
+                Sort.Order.desc("createdAt"),
+                Sort.Order.desc("updatedAt")
+        );
+    }
+
+    @Test
+    void pagingTest(){
+        System.out.println("findByNameWithPaging : "+ userRepository.findByName("martin", PageRequest.of(0,1,Sort.by(Sort.Order.desc("id")))).getContent());
+
+    }
 }

@@ -1,5 +1,6 @@
 package com.fastcampus.jpa.FastCampusJPA02.repository;
 
+import com.fastcampus.jpa.FastCampusJPA02.domain.Gender;
 import com.fastcampus.jpa.FastCampusJPA02.domain.User;
 import org.aspectj.weaver.ast.Or;
 import org.assertj.core.util.Lists;
@@ -186,5 +187,27 @@ class UserRepositoryTest {
     void pagingTest(){
         System.out.println("findByNameWithPaging : "+ userRepository.findByName("martin", PageRequest.of(0,1,Sort.by(Sort.Order.desc("id")))).getContent());
 
+    }
+
+    @Test
+    void insertAndUpdateTest(){
+        User user = new User();
+        user.setName("martin");
+        user.setEmail("martin2@fastcampus.com");
+        userRepository.save(user);
+
+        User user2 = userRepository.findById(1L).orElseThrow(RuntimeException::new);
+        user2.setName("marrrrrrtin");
+
+        userRepository.save(user2);
+    }
+
+    @Test
+    void enumTest(){
+        User user = userRepository.findById(1L).orElseThrow(RuntimeException::new);
+        user.setGender(Gender.MALE);
+        userRepository.save(user);
+        userRepository.findAll().forEach(System.out::println);
+        System.out.println(userRepository.findRowRecord().get("gender"));
     }
 }

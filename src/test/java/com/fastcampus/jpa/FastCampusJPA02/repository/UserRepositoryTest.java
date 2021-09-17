@@ -137,13 +137,13 @@ class UserRepositoryTest {
         System.out.println("findByEmailAndName : " + userRepository.findByEmailAndName("martin@fastCampus.com","martin"));
         System.out.println("findByEmailOrName : " + userRepository.findByEmailOrName("martin@fastCampus.com","denis"));
 
-        System.out.println("findByCreatedAtAfter : " + userRepository.findByCreatedAtAfter(LocalDateTime.now().minusDays(1L)));
+        System.out.println("findByCreateAtAfter : " + userRepository.findByCreateAtAfter(LocalDateTime.now().minusDays(1L)));
         System.out.println("findByIdAfter : " + userRepository.findByIdAfter(4L));
 
-        System.out.println("findByCreatedAtGreaterThen : " + userRepository.findByCreatedAtGreaterThen(LocalDateTime.now().minusDays(1L)));
-        System.out.println("findByCreatedAtGreaterThenEqual : " + userRepository.findByCreatedAtGreaterThenEqual(LocalDateTime.now().minusDays(1L)));
+        System.out.println("findByCreateAtGreaterThan : " + userRepository.findByCreateAtGreaterThan(LocalDateTime.now().minusDays(1L)));
+        System.out.println("findByCreateAtGreaterThanEqual : " + userRepository.findByCreateAtGreaterThanEqual(LocalDateTime.now().minusDays(1L)));
 
-        System.out.println("findByCreatedAtBetween : " + userRepository.findByCreatedAtBetween(LocalDateTime.now().minusDays(1L),LocalDateTime.now().plusDays(1L)));
+        System.out.println("findByCreateAtBetween : " + userRepository.findByCreateAtBetween(LocalDateTime.now().minusDays(1L),LocalDateTime.now().plusDays(1L)));
         System.out.println("findByIdBetween : " + userRepository.findByIdBetween(1L,3L));
 
         System.out.println("findByIdGreaterThanEqualAndIdLessThanEqual : " + userRepository.findByIdGreaterThanEqualAndIdLessThanEqual(1L,3L));

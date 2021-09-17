@@ -50,15 +50,15 @@ public interface UserRepository extends JpaRepository<User,Long> {
 
     List<User> findByEmailOrName(String email,String name);
 
-    List<User> findByCreatedAtAfter(LocalDateTime yesterday);
+    List<User> findByCreateAtAfter(LocalDateTime yesterday);
 
     List<User> findByIdAfter(Long id);
 
-    List<User> findByCreatedAtGreaterThen(LocalDateTime yesterday);
+    List<User> findByCreateAtGreaterThan(LocalDateTime yesterday);
 
-    List<User> findByCreatedAtGreaterThenEqual(LocalDateTime yesterday);
+    List<User> findByCreateAtGreaterThanEqual(LocalDateTime yesterday);
 
-    List<User> findByCreatedAtBetween(LocalDateTime yesterday,LocalDateTime tomorrow);
+    List<User> findByCreateAtBetween(LocalDateTime yesterday,LocalDateTime tomorrow);
 
     List<User> findByIdBetween(Long id1,Long id2);
 
